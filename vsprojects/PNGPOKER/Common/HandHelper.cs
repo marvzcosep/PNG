@@ -54,5 +54,10 @@ namespace PNGPOKER.Common
         {
             return true;
         }
+
+        internal static bool IsItHighCard(Cards cards, ref int cardScore)
+        {
+            return true;
+        }
     }
 }

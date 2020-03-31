@@ -9,12 +9,12 @@ namespace PNGPOKER.Common
 {
     internal static class Helper
     {
-        public static List<Type> FindAllDerivedTypes<T>()
+        internal static List<Type> FindAllDerivedTypes<T>()
         {
             return FindAllDerivedTypes<T>(Assembly.GetAssembly(typeof(T)));
         }
 
-        public static List<Type> FindAllDerivedTypes<T>(Assembly assembly)
+        internal static List<Type> FindAllDerivedTypes<T>(Assembly assembly)
         {
             var derivedType = typeof(T);
             return assembly
