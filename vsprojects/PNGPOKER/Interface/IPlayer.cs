@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PNGPOKER.Model
+namespace PNGPOKER.Interface
 {
     internal interface IPlayer
     {

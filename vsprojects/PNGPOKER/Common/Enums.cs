@@ -42,7 +42,7 @@ namespace PNGPOKER.Common
         /// <summary>
         /// List of Hands Type sorted by score
         /// </summary>
-        internal enum HandType
+        internal enum HandCategory
         {
             HighCard,
             OnePair,

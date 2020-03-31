@@ -9,6 +9,7 @@ namespace PNGPOKER.Common
 {
     internal static class HandHelper
     {
+
         internal static bool IsItRoyalFlush(Cards cards, ref int cardScore)
         {
             return true;
