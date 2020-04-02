@@ -17,6 +17,8 @@ namespace PNGGAME.Model
         private Deck _deck;
 
         public List<PokerPlayer> Players => this._players;
+        public List<PokerPlayer> Winners => this._winners;
+        public Enums.HandCategory WinnersHandCategory => this._winningHandCategory;
         public Deck Deck => this._deck;
         
         public PokerGame()

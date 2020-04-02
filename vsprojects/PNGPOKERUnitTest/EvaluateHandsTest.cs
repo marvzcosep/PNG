@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PNGGAME.Common;
 using PNGGAME.Model;
@@ -39,6 +40,39 @@ namespace PNGPOKERUnitTest
 
             Assert.IsFalse(HandHelper.IsItRoyalFlush(cards));
         }
+
+        [TestMethod]
+        public void RoyalFlush_EvaluateWinnersCount()
+        {
+            var players = new List<PokerPlayer>()
+            {
+                new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Two, Suit.Clover),
+                                    new Card(Rank.King, Suit.Spades),
+                                    new Card(Rank.Five, Suit.Diamonds),
+                                    new Card(Rank.Jack, Suit.Clover),
+                                    new Card(Rank.Ace, Suit.Hearts)} } },
+                new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Ace, Suit.Hearts),
+                                    new Card(Rank.King, Suit.Hearts),
+                                    new Card(Rank.Queen, Suit.Hearts),
+                                    new Card(Rank.Jack, Suit.Hearts),
+                                    new Card(Rank.Ten, Suit.Hearts)} } },
+                new PokerPlayer() { Name = "Des", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Ace, Suit.Diamonds),
+                                    new Card(Rank.King, Suit.Diamonds),
+                                    new Card(Rank.Queen, Suit.Diamonds),
+                                    new Card(Rank.Jack, Suit.Diamonds),
+                                    new Card(Rank.Ten, Suit.Diamonds)} } }
+            };
+
+            foreach (var player in players)
+                player.Hand.EvaluateHandType();
+
+            var winners = HandHelper.EvaluateWinners(players, HandCategory.RoyalFlush);
+
+            Assert.AreEqual(2, winners.Count);
+        }
         #endregion
 
         #region Straight Flush
@@ -70,6 +104,39 @@ namespace PNGPOKERUnitTest
             };
 
             Assert.IsFalse(HandHelper.IsItStraightFlush(cards));
+        }
+
+        [TestMethod]
+        public void StraightFlush_EvaluateWinnersCount()
+        {
+            var players = new List<PokerPlayer>()
+            {
+                new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Eight, Suit.Clover),
+                                    new Card(Rank.Nine, Suit.Clover),
+                                    new Card(Rank.Queen, Suit.Clover),
+                                    new Card(Rank.Jack, Suit.Clover),
+                                    new Card(Rank.Ten, Suit.Clover)} } },
+                new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Nine, Suit.Hearts),
+                                    new Card(Rank.King, Suit.Hearts),
+                                    new Card(Rank.Queen, Suit.Hearts),
+                                    new Card(Rank.Jack, Suit.Hearts),
+                                    new Card(Rank.Ten, Suit.Hearts)} } },
+                new PokerPlayer() { Name = "Des", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Nine, Suit.Diamonds),
+                                    new Card(Rank.King, Suit.Diamonds),
+                                    new Card(Rank.Queen, Suit.Diamonds),
+                                    new Card(Rank.Jack, Suit.Diamonds),
+                                    new Card(Rank.Ten, Suit.Diamonds)} } }
+            };
+
+            foreach (var player in players)
+                player.Hand.EvaluateHandType();
+
+            var winners = HandHelper.EvaluateWinners(players, HandCategory.StraightFlush);
+
+            Assert.AreEqual(2, winners.Count);
         }
         #endregion
 
@@ -103,6 +170,39 @@ namespace PNGPOKERUnitTest
 
             Assert.IsFalse(HandHelper.IsItFourOfAKind(cards));
         }
+
+        [TestMethod]
+        public void FourOfAKind_EvaluateWinnersCount()
+        {
+            var players = new List<PokerPlayer>()
+            {
+                new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.King, Suit.Diamonds),
+                                    new Card(Rank.King, Suit.Hearts),
+                                    new Card(Rank.King, Suit.Clover),
+                                    new Card(Rank.King, Suit.Spades),
+                                    new Card(Rank.Ace, Suit.Hearts)} } },
+                new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Ace, Suit.Diamonds),
+                                    new Card(Rank.Ace, Suit.Hearts),
+                                    new Card(Rank.Ace, Suit.Clover),
+                                    new Card(Rank.Ace, Suit.Spades),
+                                    new Card(Rank.Queen, Suit.Hearts)} } },
+                new PokerPlayer() { Name = "Des", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Queen, Suit.Diamonds),
+                                    new Card(Rank.Queen, Suit.Hearts),
+                                    new Card(Rank.Queen, Suit.Clover),
+                                    new Card(Rank.Queen, Suit.Spades),
+                                    new Card(Rank.Jack, Suit.Hearts)} } }
+            };
+
+            foreach (var player in players)
+                player.Hand.EvaluateHandType();
+
+            var winners = HandHelper.EvaluateWinners(players, HandCategory.FourOfAKind);
+
+            Assert.AreEqual(1, winners.Count);
+        }
         #endregion
 
         #region Full House
@@ -134,6 +234,39 @@ namespace PNGPOKERUnitTest
             };
 
             Assert.IsFalse(HandHelper.IsItFullHouse(cards));
+        }
+
+        [TestMethod]
+        public void FullHouse_EvaluateWinnersCount()
+        {
+            var players = new List<PokerPlayer>()
+            {
+                new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.King, Suit.Diamonds),
+                                    new Card(Rank.King, Suit.Hearts),
+                                    new Card(Rank.King, Suit.Clover),
+                                    new Card(Rank.Ace, Suit.Spades),
+                                    new Card(Rank.Ace, Suit.Hearts)} } },
+                new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Ace, Suit.Diamonds),
+                                    new Card(Rank.Ace, Suit.Hearts),
+                                    new Card(Rank.Ace, Suit.Clover),
+                                    new Card(Rank.Queen, Suit.Spades),
+                                    new Card(Rank.Queen, Suit.Hearts)} } },
+                new PokerPlayer() { Name = "Des", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Queen, Suit.Diamonds),
+                                    new Card(Rank.Queen, Suit.Hearts),
+                                    new Card(Rank.Queen, Suit.Clover),
+                                    new Card(Rank.Jack, Suit.Spades),
+                                    new Card(Rank.Jack, Suit.Hearts)} } }
+            };
+
+            foreach (var player in players)
+                player.Hand.EvaluateHandType();
+
+            var winners = HandHelper.EvaluateWinners(players, HandCategory.FullHouse);
+
+            Assert.AreEqual(1, winners.Count);
         }
         #endregion
 
@@ -167,6 +300,39 @@ namespace PNGPOKERUnitTest
 
             Assert.IsFalse(HandHelper.IsItFlush(cards));
         }
+
+        [TestMethod]
+        public void Flush_EvaluateWinnersCount()
+        {
+            var players = new List<PokerPlayer>()
+            {
+                new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Two, Suit.Spades),
+                                    new Card(Rank.King, Suit.Spades),
+                                    new Card(Rank.Five, Suit.Spades),
+                                    new Card(Rank.Jack, Suit.Spades),
+                                    new Card(Rank.Ace, Suit.Spades)} } },
+                new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Three, Suit.Hearts),
+                                    new Card(Rank.King, Suit.Hearts),
+                                    new Card(Rank.Five, Suit.Hearts),
+                                    new Card(Rank.Jack, Suit.Hearts),
+                                    new Card(Rank.Ace, Suit.Hearts)} } },
+                new PokerPlayer() { Name = "Des", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Three, Suit.Diamonds),
+                                    new Card(Rank.King, Suit.Diamonds),
+                                    new Card(Rank.Five, Suit.Diamonds),
+                                    new Card(Rank.Jack, Suit.Diamonds),
+                                    new Card(Rank.Ace, Suit.Diamonds)} } }
+            };
+
+            foreach (var player in players)
+                player.Hand.EvaluateHandType();
+
+            var winners = HandHelper.EvaluateWinners(players, HandCategory.Flush);
+
+            Assert.AreEqual(2, winners.Count);
+        }
         #endregion
 
         #region Straight
@@ -198,6 +364,39 @@ namespace PNGPOKERUnitTest
             };
 
             Assert.IsFalse(HandHelper.IsItStraight(cards));
+        }
+
+        [TestMethod]
+        public void Straight_EvaluateWinnersCount()
+        {
+            var players = new List<PokerPlayer>()
+            {
+                new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Eight, Suit.Hearts),
+                                    new Card(Rank.Nine, Suit.Spades),
+                                    new Card(Rank.Queen, Suit.Clover),
+                                    new Card(Rank.Jack, Suit.Diamonds),
+                                    new Card(Rank.Ten, Suit.Hearts)} } },
+                new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Nine, Suit.Spades),
+                                    new Card(Rank.King, Suit.Clover),
+                                    new Card(Rank.Queen, Suit.Diamonds),
+                                    new Card(Rank.Jack, Suit.Hearts),
+                                    new Card(Rank.Ten, Suit.Spades)} } },
+                new PokerPlayer() { Name = "Des", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Nine, Suit.Clover),
+                                    new Card(Rank.King, Suit.Diamonds),
+                                    new Card(Rank.Queen, Suit.Hearts),
+                                    new Card(Rank.Jack, Suit.Spades),
+                                    new Card(Rank.Ten, Suit.Clover)} } }
+            };
+
+            foreach (var player in players)
+                player.Hand.EvaluateHandType();
+
+            var winners = HandHelper.EvaluateWinners(players, HandCategory.Straight);
+
+            Assert.AreEqual(2, winners.Count);
         }
         #endregion
 
@@ -231,6 +430,39 @@ namespace PNGPOKERUnitTest
 
             Assert.IsFalse(HandHelper.IsItThreeOfAKind(cards));
         }
+
+        [TestMethod]
+        public void ThreeOfAKind_EvaluateWinnersCount()
+        {
+            var players = new List<PokerPlayer>()
+            {
+                new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.King, Suit.Diamonds),
+                                    new Card(Rank.King, Suit.Hearts),
+                                    new Card(Rank.King, Suit.Clover),
+                                    new Card(Rank.Ace, Suit.Spades),
+                                    new Card(Rank.Two, Suit.Hearts)} } },
+                new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Ace, Suit.Diamonds),
+                                    new Card(Rank.Ace, Suit.Hearts),
+                                    new Card(Rank.Ace, Suit.Clover),
+                                    new Card(Rank.Queen, Suit.Spades),
+                                    new Card(Rank.King, Suit.Hearts)} } },
+                new PokerPlayer() { Name = "Des", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Queen, Suit.Diamonds),
+                                    new Card(Rank.Queen, Suit.Hearts),
+                                    new Card(Rank.Queen, Suit.Clover),
+                                    new Card(Rank.Eight, Suit.Spades),
+                                    new Card(Rank.Jack, Suit.Hearts)} } }
+            };
+
+            foreach (var player in players)
+                player.Hand.EvaluateHandType();
+
+            var winners = HandHelper.EvaluateWinners(players, HandCategory.ThreeOfAKind);
+
+            Assert.AreEqual(1, winners.Count);
+        }
         #endregion
 
         #region Two Pair
@@ -263,6 +495,39 @@ namespace PNGPOKERUnitTest
 
             Assert.IsFalse(HandHelper.IsItTwoPair(cards));
         }
+
+        [TestMethod]
+        public void TwoPair_EvaluateWinnersCount()
+        {
+            var players = new List<PokerPlayer>()
+            {
+                new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.King, Suit.Diamonds),
+                                    new Card(Rank.King, Suit.Hearts),
+                                    new Card(Rank.Ace, Suit.Clover),
+                                    new Card(Rank.Ace, Suit.Spades),
+                                    new Card(Rank.Six, Suit.Hearts)} } },
+                new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Ace, Suit.Diamonds),
+                                    new Card(Rank.Ace, Suit.Hearts),
+                                    new Card(Rank.King, Suit.Clover),
+                                    new Card(Rank.Queen, Suit.Spades),
+                                    new Card(Rank.King, Suit.Hearts)} } },
+                new PokerPlayer() { Name = "Des", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Queen, Suit.Diamonds),
+                                    new Card(Rank.Queen, Suit.Hearts),
+                                    new Card(Rank.Jack, Suit.Clover),
+                                    new Card(Rank.Eight, Suit.Spades),
+                                    new Card(Rank.Jack, Suit.Hearts)} } }
+            };
+
+            foreach (var player in players)
+                player.Hand.EvaluateHandType();
+
+            var winners = HandHelper.EvaluateWinners(players, HandCategory.TwoPair);
+
+            Assert.AreEqual(1, winners.Count);
+        }
         #endregion
 
         #region One Pair
@@ -294,6 +559,74 @@ namespace PNGPOKERUnitTest
             };
 
             Assert.IsFalse(HandHelper.IsItOnePair(cards));
+        }
+
+        [TestMethod]
+        public void OnePair_EvaluateWinnersCount()
+        {
+            var players = new List<PokerPlayer>()
+            {
+                new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Jack, Suit.Diamonds),
+                                    new Card(Rank.King, Suit.Hearts),
+                                    new Card(Rank.Ace, Suit.Clover),
+                                    new Card(Rank.Ace, Suit.Spades),
+                                    new Card(Rank.Six, Suit.Hearts)} } },
+                new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Ace, Suit.Diamonds),
+                                    new Card(Rank.Ace, Suit.Hearts),
+                                    new Card(Rank.King, Suit.Clover),
+                                    new Card(Rank.Queen, Suit.Spades),
+                                    new Card(Rank.Jack, Suit.Hearts)} } },
+                new PokerPlayer() { Name = "Des", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Queen, Suit.Diamonds),
+                                    new Card(Rank.Queen, Suit.Hearts),
+                                    new Card(Rank.Jack, Suit.Clover),
+                                    new Card(Rank.Eight, Suit.Spades),
+                                    new Card(Rank.Five, Suit.Hearts)} } }
+            };
+
+            foreach (var player in players)
+                player.Hand.EvaluateHandType();
+
+            var winners = HandHelper.EvaluateWinners(players, HandCategory.OnePair);
+
+            Assert.AreEqual(1, winners.Count);
+        }
+        #endregion
+
+        #region High Card
+        [TestMethod]
+        public void HighCard_EvaluateWinnersCount()
+        {
+            var players = new List<PokerPlayer>()
+            {
+                new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Two, Suit.Clover),
+                                    new Card(Rank.King, Suit.Spades),
+                                    new Card(Rank.Five, Suit.Diamonds),
+                                    new Card(Rank.Jack, Suit.Clover),
+                                    new Card(Rank.Ace, Suit.Hearts)} } },
+                new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Three, Suit.Hearts),
+                                    new Card(Rank.King, Suit.Clover),
+                                    new Card(Rank.Five, Suit.Spades),
+                                    new Card(Rank.Jack, Suit.Diamonds),
+                                    new Card(Rank.Ace, Suit.Clover)} } },
+                new PokerPlayer() { Name = "Des", Hand = new Hand() { Cards = new Cards{
+                                    new Card(Rank.Three, Suit.Diamonds),
+                                    new Card(Rank.King, Suit.Hearts),
+                                    new Card(Rank.Five, Suit.Clover),
+                                    new Card(Rank.Jack, Suit.Spades),
+                                    new Card(Rank.Ace, Suit.Diamonds)} } }
+            };
+
+            foreach (var player in players)
+                player.Hand.EvaluateHandType();
+
+            var winners = HandHelper.EvaluateWinners(players, HandCategory.HighCard);
+
+            Assert.AreEqual(2, winners.Count);
         }
         #endregion
     }

@@ -24,7 +24,6 @@ namespace PNGGAME.Common
         /// </summary>
         public enum Rank
         {
-            Ace,
             Two,
             Three,
             Four,
@@ -36,7 +35,8 @@ namespace PNGGAME.Common
             Ten,
             Jack,
             Queen,
-            King            
+            King,
+            Ace
         }
 
         /// <summary>

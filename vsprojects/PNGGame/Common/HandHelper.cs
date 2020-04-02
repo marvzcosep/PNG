@@ -17,7 +17,7 @@ namespace PNGGAME.Common
         /// <returns></returns>
         public static Enums.HandCategory GetWinningHandCategory(List<PokerPlayer> players)
         {
-            Enums.HandCategory winningHandCategory = new Enums.HandCategory();
+            var winningHandCategory = Enums.HandCategory.None;
 
             for (int i = 0; i < players.Count; i++)
             {
@@ -25,12 +25,12 @@ namespace PNGGAME.Common
                     winningHandCategory = players[i].Hand.HandCategory;
                 else
                 {
-                    if((int)players[i].Hand.HandCategory > (int)winningHandCategory)
+                    if ((int)players[i].Hand.HandCategory > (int)winningHandCategory)
                         winningHandCategory = players[i].Hand.HandCategory;
                 }
             }
 
-            return Enums.HandCategory.Flush;
+            return winningHandCategory;
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace PNGGAME.Common
         /// <returns></returns>
         internal static List<PokerPlayer> EvaluateRoyalFlushWinners(List<PokerPlayer> players)
         {
-            return players;
+            return GetAllPlayersWithWinningHandCategory(players, Enums.HandCategory.RoyalFlush);
         }
         #endregion
 
@@ -144,27 +144,7 @@ namespace PNGGAME.Common
         /// <returns></returns>
         internal static List<PokerPlayer> EvaluateStraightFlushWinners(List<PokerPlayer> players)
         {
-            var results = new List<PokerPlayer>();
-
-            var highestRank = Enums.Rank.Two;
-
-            foreach (var player in players)
-            {
-                var tempRank = (player.Hand.Cards.OrderBy(x => x.Rank).ToArray()).Last().Rank;
-
-                if (((int)tempRank > (int)highestRank && highestRank != Enums.Rank.Ace) || tempRank.Equals(Enums.Rank.Ace))
-                    highestRank = tempRank;
-            }
-
-            foreach (var player in players)
-            {
-                var tempRank = (player.Hand.Cards.OrderBy(x => x.Rank).ToArray()).Last().Rank;
-
-                if (tempRank.Equals(highestRank))
-                    results.Add(player);
-            }
-
-            return results;
+            return CheckStraightCardsToEvaluateWinners(GetAllPlayersWithWinningHandCategory(players, Enums.HandCategory.StraightFlush));
         }
         #endregion
 
@@ -187,7 +167,25 @@ namespace PNGGAME.Common
         internal static List<PokerPlayer> EvaluateFourOfAKindWinners(List<PokerPlayer> players)
         {
             var results = new List<PokerPlayer>();
+            var highestRank = Enums.Rank.Two;
 
+            players = GetAllPlayersWithWinningHandCategory(players, Enums.HandCategory.FourOfAKind);
+
+            foreach (var player in players.ToList())
+            {
+                var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 4).FirstOrDefault().Key;
+
+                if ((int)tempRank > (int)highestRank)
+                    highestRank = tempRank;
+            }
+
+            foreach (var player in players.ToList())
+            {
+                var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 4).FirstOrDefault().Key;
+
+                if (tempRank.Equals(highestRank))
+                    results.Add(player);
+            }
 
             return results;
         }
@@ -212,6 +210,49 @@ namespace PNGGAME.Common
         internal static List<PokerPlayer> EvaluateFullHouseWinners(List<PokerPlayer> players)
         {
             var results = new List<PokerPlayer>();
+            var tempWinners = new List<PokerPlayer>();
+            players = GetAllPlayersWithWinningHandCategory(players, Enums.HandCategory.FullHouse);
+            var highestThreeOfAKindRank = Enums.Rank.Two;
+            var highestOnePairRank = Enums.Rank.Two;
+
+            foreach (var player in players.ToList())
+            {
+                var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 3).FirstOrDefault().Key;
+
+                if ((int)tempRank > (int)highestThreeOfAKindRank)
+                    highestThreeOfAKindRank = tempRank;
+            }
+
+            foreach (var player in players.ToList())
+            {
+                var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 3).FirstOrDefault().Key;
+
+                if (tempRank.Equals(highestThreeOfAKindRank))
+                    results.Add(player);
+            }
+
+            if (results.Count > 1)
+            {
+                tempWinners = results.ToList();
+                results.Clear();
+
+                foreach (var player in tempWinners.ToList())
+                {
+                    var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 2).FirstOrDefault().Key;
+
+                    if ((int)tempRank > (int)highestOnePairRank)
+                        highestOnePairRank = tempRank;
+                }
+
+                foreach (var player in tempWinners.ToList())
+                {
+                    var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 2).FirstOrDefault().Key;
+
+                    if (tempRank.Equals(highestOnePairRank))
+                        results.Add(player);
+                }
+            }
+
             return results;
         }
         #endregion
@@ -234,10 +275,7 @@ namespace PNGGAME.Common
         /// <returns></returns>
         internal static List<PokerPlayer> EvaluateFlushWinners(List<PokerPlayer> players)
         {
-            var results = new List<PokerPlayer>();
-
-
-            return results;
+            return CheckAllCardsToEvaluateWinners(GetAllPlayersWithWinningHandCategory(players, Enums.HandCategory.Flush));
         }
         #endregion
 
@@ -251,10 +289,10 @@ namespace PNGGAME.Common
         {
             var result = true;
             if (cards.Where(x => x.Rank == Enums.Rank.Ace ||
-                             x.Rank == Enums.Rank.King ||
-                             x.Rank == Enums.Rank.Queen ||
-                             x.Rank == Enums.Rank.Jack ||
-                             x.Rank == Enums.Rank.Ten).Count() == 5)
+                             x.Rank == Enums.Rank.Two ||
+                             x.Rank == Enums.Rank.Three ||
+                             x.Rank == Enums.Rank.Four ||
+                             x.Rank == Enums.Rank.Five).Count() == 5)
 
             {
                 result = true;
@@ -280,19 +318,29 @@ namespace PNGGAME.Common
         /// <returns></returns>
         internal static List<PokerPlayer> EvaluateStraightWinners(List<PokerPlayer> players)
         {
+            return CheckStraightCardsToEvaluateWinners(GetAllPlayersWithWinningHandCategory(players, Enums.HandCategory.Straight));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="players"></param>
+        /// <returns></returns>
+        private static List<PokerPlayer> CheckStraightCardsToEvaluateWinners(List<PokerPlayer> players)
+        {
             var results = new List<PokerPlayer>();
 
             var highestRank = Enums.Rank.Two;
 
-            foreach (var player in players)
+            foreach (var player in players.ToList())
             {
                 var tempRank = (player.Hand.Cards.OrderBy(x => x.Rank).ToArray()).Last().Rank;
 
-                if (((int)tempRank > (int)highestRank && highestRank != Enums.Rank.Ace) || tempRank.Equals(Enums.Rank.Ace))
+                if ((int)tempRank > (int)highestRank)
                     highestRank = tempRank;
             }
 
-            foreach (var player in players)
+            foreach (var player in players.ToList())
             {
                 var tempRank = (player.Hand.Cards.OrderBy(x => x.Rank).ToArray()).Last().Rank;
 
@@ -323,6 +371,72 @@ namespace PNGGAME.Common
         internal static List<PokerPlayer> EvaluateThreeOfAKindWinners(List<PokerPlayer> players)
         {
             var results = new List<PokerPlayer>();
+            var tempWinners = new List<PokerPlayer>();
+            players = GetAllPlayersWithWinningHandCategory(players, Enums.HandCategory.ThreeOfAKind);
+            var highestThreeOfAKindRank = Enums.Rank.Two;
+            var highestOutsideRank = Enums.Rank.Two;
+
+            foreach (var player in players.ToList())
+            {
+                var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 3).FirstOrDefault().Key;
+
+                if ((int)tempRank > (int)highestThreeOfAKindRank)
+                    highestThreeOfAKindRank = tempRank;
+            }
+
+            foreach (var player in players.ToList())
+            {
+                var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 3).FirstOrDefault().Key;
+
+                if (tempRank.Equals(highestThreeOfAKindRank))
+                    results.Add(player);
+            }
+
+            if (results.Count > 1)
+            {
+                tempWinners = results.ToList();
+                highestOutsideRank = Enums.Rank.Two;
+                results.Clear();
+
+                foreach (var player in tempWinners.ToList())
+                {
+                    var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 1).OrderBy(x => x.Key).ToArray()[1].Key;
+
+                    if ((int)tempRank > (int)highestOutsideRank)
+                        highestOutsideRank = tempRank;
+                }
+
+                foreach (var player in tempWinners.ToList())
+                {
+                    var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 1).OrderBy(x => x.Key).ToArray()[1].Key;
+
+                    if (tempRank.Equals(highestOutsideRank))
+                        results.Add(player);
+                }
+            }
+
+            if (results.Count > 1)
+            {
+                tempWinners = results.ToList();
+                highestOutsideRank = Enums.Rank.Two;
+                results.Clear();
+
+                foreach (var player in tempWinners.ToList())
+                {
+                    var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 1).OrderBy(x => x.Key).ToArray()[0].Key;
+
+                    if ((int)tempRank > (int)highestOutsideRank)
+                        highestOutsideRank = tempRank;
+                }
+
+                foreach (var player in tempWinners.ToList())
+                {
+                    var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 1).OrderBy(x => x.Key).ToArray()[0].Key;
+
+                    if (tempRank.Equals(highestOutsideRank))
+                        results.Add(player);
+                }
+            }
             return results;
         }
         #endregion
@@ -346,6 +460,72 @@ namespace PNGGAME.Common
         internal static List<PokerPlayer> EvaluateTwoPairWinners(List<PokerPlayer> players)
         {
             var results = new List<PokerPlayer>();
+            var tempWinners = new List<PokerPlayer>();
+            players = GetAllPlayersWithWinningHandCategory(players, Enums.HandCategory.TwoPair);
+            var highestPairsRank = Enums.Rank.Two;
+            var highestOutsideRank = Enums.Rank.Two;
+
+            foreach (var player in players.ToList())
+            {
+                var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 2).OrderBy(x => x.Key).ToArray()[1].Key;
+
+                if ((int)tempRank > (int)highestPairsRank)
+                    highestPairsRank = tempRank;
+            }
+
+            foreach (var player in players.ToList())
+            {
+                var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 2).OrderBy(x => x.Key).ToArray()[1].Key;
+
+                if (tempRank.Equals(highestPairsRank))
+                    results.Add(player);
+            }
+
+            if (results.Count > 1)
+            {
+                tempWinners = results.ToList();
+                highestPairsRank = Enums.Rank.Two;
+                results.Clear();
+
+                foreach (var player in tempWinners.ToList())
+                {
+                    var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 2).OrderBy(x => x.Key).ToArray()[0].Key;
+
+                    if ((int)tempRank > (int)highestPairsRank)
+                        highestPairsRank = tempRank;
+                }
+
+                foreach (var player in tempWinners.ToList())
+                {
+                    var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 2).OrderBy(x => x.Key).ToArray()[0].Key;
+
+                    if (tempRank.Equals(highestPairsRank))
+                        results.Add(player);
+                }
+            }
+
+            if (results.Count > 1)
+            {
+                tempWinners = results.ToList();
+                highestOutsideRank = Enums.Rank.Two;
+                results.Clear();
+
+                foreach (var player in tempWinners.ToList())
+                {
+                    var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 1).FirstOrDefault().Key;
+
+                    if ((int)tempRank > (int)highestOutsideRank)
+                        highestOutsideRank = tempRank;
+                }
+
+                foreach (var player in tempWinners.ToList())
+                {
+                    var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 1).FirstOrDefault().Key;
+
+                    if (tempRank.Equals(highestOutsideRank))
+                        results.Add(player);
+                }
+            }
             return results;
         }
         #endregion
@@ -369,6 +549,95 @@ namespace PNGGAME.Common
         internal static List<PokerPlayer> EvaluateOnePairWinners(List<PokerPlayer> players)
         {
             var results = new List<PokerPlayer>();
+            var tempWinners = new List<PokerPlayer>();
+            players = GetAllPlayersWithWinningHandCategory(players, Enums.HandCategory.OnePair);
+            var highestPairsRank = Enums.Rank.Two;
+            var highestOutsideRank = Enums.Rank.Two;
+
+            foreach (var player in players.ToList())
+            {
+                var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 2).FirstOrDefault().Key;
+
+                if ((int)tempRank > (int)highestPairsRank)
+                    highestPairsRank = tempRank;
+            }
+
+            foreach (var player in players.ToList())
+            {
+                var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 2).FirstOrDefault().Key;
+
+                if (tempRank.Equals(highestPairsRank))
+                    results.Add(player);
+            }
+
+            if (results.Count > 1)
+            {
+                tempWinners = results.ToList();
+                highestOutsideRank = Enums.Rank.Two;
+                results.Clear();
+
+                foreach (var player in tempWinners.ToList())
+                {
+                    var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 1).OrderBy(x => x.Key).ToArray()[2].Key;
+
+                    if ((int)tempRank > (int)highestOutsideRank)
+                        highestOutsideRank = tempRank;
+                }
+
+                foreach (var player in tempWinners.ToList())
+                {
+                    var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 1).OrderBy(x => x.Key).ToArray()[2].Key;
+
+                    if (tempRank.Equals(highestOutsideRank))
+                        results.Add(player);
+                }
+            }
+
+            if (results.Count > 1)
+            {
+                tempWinners = results.ToList();
+                highestOutsideRank = Enums.Rank.Two;
+                results.Clear();
+
+                foreach (var player in tempWinners.ToList())
+                {
+                    var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 1).OrderBy(x => x.Key).ToArray()[1].Key;
+
+                    if ((int)tempRank > (int)highestOutsideRank)
+                        highestOutsideRank = tempRank;
+                }
+
+                foreach (var player in tempWinners.ToList())
+                {
+                    var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 1).OrderBy(x => x.Key).ToArray()[1].Key;
+
+                    if (tempRank.Equals(highestOutsideRank))
+                        results.Add(player);
+                }
+
+                if (results.Count > 1)
+                {
+                    tempWinners = results.ToList();
+                    highestOutsideRank = Enums.Rank.Two;
+                    results.Clear();
+
+                    foreach (var player in tempWinners.ToList())
+                    {
+                        var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 1).OrderBy(x => x.Key).ToArray()[0].Key;
+
+                        if ((int)tempRank > (int)highestOutsideRank)
+                            highestOutsideRank = tempRank;
+                    }
+
+                    foreach (var player in tempWinners.ToList())
+                    {
+                        var tempRank = player.Hand.Cards.GroupBy(x => x.Rank).Where(y => y.Count() == 1).OrderBy(x => x.Key).ToArray()[0].Key;
+
+                        if (tempRank.Equals(highestOutsideRank))
+                            results.Add(player);
+                    }
+                }
+            }
             return results;
         }
         #endregion
@@ -381,7 +650,48 @@ namespace PNGGAME.Common
         /// <returns></returns>
         internal static List<PokerPlayer> EvaluateHighCardWinners(List<PokerPlayer> players)
         {
+            return CheckAllCardsToEvaluateWinners(GetAllPlayersWithWinningHandCategory(players, Enums.HandCategory.HighCard));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="players"></param>
+        /// <returns></returns>
+        private static List<PokerPlayer> CheckAllCardsToEvaluateWinners(List<PokerPlayer> players)
+        {
             var results = new List<PokerPlayer>();
+            var tempPlayers = new List<PokerPlayer>();
+            results = players;
+
+            for (int i = 4; i >= 0; i--)
+            {
+                tempPlayers.Clear();
+
+                var highestRank = Enums.Rank.Two;
+
+                foreach (var player in results.ToList())
+                {
+                    var tempRank = (player.Hand.Cards.OrderBy(x => x.Rank).ToArray())[i].Rank;
+
+                    if ((int)tempRank > (int)highestRank)
+                        highestRank = tempRank;
+                }
+
+                foreach (var player in results.ToList())
+                {
+                    var tempRank = (player.Hand.Cards.OrderBy(x => x.Rank).ToArray())[i].Rank;
+
+                    if (tempRank.Equals(highestRank))
+                        tempPlayers.Add(player);
+                }
+
+                if (tempPlayers.Count > 0)
+                    results = tempPlayers.ToList();
+                else
+                    break;
+            }
+
             return results;
         }
         #endregion

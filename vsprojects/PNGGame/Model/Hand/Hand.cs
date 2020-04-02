@@ -41,6 +41,14 @@ namespace PNGGAME.Model
         }
 
         /// <summary>
+        /// Evaluates Hand Type of the Cards by demand
+        /// </summary>
+        public void EvaluateHandType()
+        {
+            this.EvaluateHandType(this._cards);
+        }
+
+        /// <summary>
         /// Evaluates Hand Type of the Cards
         /// </summary>
         /// <param name="cards"></param>
@@ -67,6 +75,6 @@ namespace PNGGAME.Model
             else 
                 this._handType = Enums.HandCategory.HighCard;
 
-        }
+        } 
     }
 }
