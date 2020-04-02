@@ -1,11 +1,4 @@
-﻿using PNGGAME.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PNGGAME.Model
+﻿namespace PNGGAME.Model
 {
     public class PokerPlayer : Player
     {

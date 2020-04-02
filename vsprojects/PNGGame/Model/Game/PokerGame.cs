@@ -1,11 +1,6 @@
 ﻿using PNGGame.Model.Game;
 using PNGGAME.Common;
-using PNGGAME.Interface;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PNGGAME.Model
 {
@@ -21,6 +16,9 @@ namespace PNGGAME.Model
         public Enums.HandCategory WinnersHandCategory => this._winningHandCategory;
         public Deck Deck => this._deck;
         
+        /// <summary>
+        /// Poker Game Constructor
+        /// </summary>
         public PokerGame()
         {
             base.Name = "Poker";

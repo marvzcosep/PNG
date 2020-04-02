@@ -1,9 +1,6 @@
 ﻿using PNGGAME.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PNGGAME.Common
 {
@@ -11,7 +8,7 @@ namespace PNGGAME.Common
     {
         #region Common
         /// <summary>
-        /// 
+        /// Get the hand category of the winner(s)
         /// </summary>
         /// <param name="players"></param>
         /// <returns></returns>
@@ -34,7 +31,7 @@ namespace PNGGAME.Common
         }
 
         /// <summary>
-        /// 
+        /// List all players within the winning hand category
         /// </summary>
         /// <param name="players"></param>
         /// <param name="winningHandCategory"></param>
@@ -51,7 +48,7 @@ namespace PNGGAME.Common
         }
 
         /// <summary>
-        /// 
+        /// Routing of winner(s) evaluation
         /// </summary>
         /// <param name="players"></param>
         /// <param name="winningHandCategory"></param>

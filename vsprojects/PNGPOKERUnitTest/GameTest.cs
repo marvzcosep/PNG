@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PNGGAME.Model;
+using System.Collections.Generic;
 
 namespace PNGPOKERUnitTest
 {
