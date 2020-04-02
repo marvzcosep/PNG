@@ -10,8 +10,8 @@ namespace PNGGAME.Model
     public class Deck
     {
         private Cards _cards;
-        public Cards Cards => this._cards;
         private static Random rng = new Random();
+        public Cards Cards => this._cards;
 
         /// <summary>
         /// Instantiate Deck

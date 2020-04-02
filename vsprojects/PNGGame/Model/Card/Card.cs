@@ -18,7 +18,7 @@ namespace PNGGAME.Model
         public Enums.Rank Rank => this._rank;
 
         /// <summary>
-        /// Instantiate Card
+        /// Instantiate Card / Card Constructor
         /// </summary>
         /// <param name="rank">Card Rank Type (Enums)</param>
         /// <param name="suit">Card Suit Type (Enums)</param>

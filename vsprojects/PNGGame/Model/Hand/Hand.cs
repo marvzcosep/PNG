@@ -10,18 +10,17 @@ namespace PNGGAME.Model
     public class Hand
     {
         private Cards _cards;
-        //private HandType _handType;
-        //private HandTypes _handTypes;
         private Enums.HandCategory _handType;
         private int _cardsScore;
         private int _highestOutRankScore;
         public Cards Cards { get => this._cards; set => this._cards = value; }
-        //public HandType HandType => this._handType;
         public Enums.HandCategory HandCategory => this._handType;
         public int CardsScore => this._cardsScore;
         public int HighestOutRankScore => this._highestOutRankScore;
         
-
+        /// <summary>
+        /// Hand Constructor
+        /// </summary>
         public Hand()
         {
             this._cards = new Cards();
@@ -30,21 +29,23 @@ namespace PNGGAME.Model
             this._cards.CollectionChanged += Cards_CollectionChanged;
         }
 
+        /// <summary>
+        /// Will be fired when theres a changes in the list of card
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Cards_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if ((Cards)sender != null && ((Cards)sender).Count == 5)
                 this.EvaluateHandType((Cards)sender);
         }
 
+        /// <summary>
+        /// Evaluates Hand Type of the Cards
+        /// </summary>
+        /// <param name="cards"></param>
         private void EvaluateHandType(Cards cards)
         {
-            //var output = Helper.FindAllDerivedTypes<HandType>();
-            //foreach (var type in output)
-            //{
-            //    if ((bool)type.GetMethod("Validate").Invoke(type, new object[] { cards }))
-            //        this._handTypes.Add(type);
-            //}
-
             if (HandHelper.IsItRoyalFlush(cards))
                 this._handType = Enums.HandCategory.RoyalFlush;
             else if (HandHelper.IsItStraightFlush(cards))

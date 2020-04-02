@@ -1,4 +1,6 @@
-﻿using PNGGAME.Interface;
+﻿using PNGGame.Model.Game;
+using PNGGAME.Common;
+using PNGGAME.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,17 +9,22 @@ using System.Threading.Tasks;
 
 namespace PNGGAME.Model
 {
-    public class PokerGame : IGame
+    public class PokerGame : Game
     {
         private List<PokerPlayer> _players;
+        private List<PokerPlayer> _winners;
+        private Enums.HandCategory _winningHandCategory;
         private Deck _deck;
-        public string Name => "Poker";
+
         public List<PokerPlayer> Players => this._players;
         public Deck Deck => this._deck;
         
         public PokerGame()
         {
+            base.Name = "Poker";
             this._players = new List<PokerPlayer>();
+            this._winners = new List<PokerPlayer>();
+            this._winningHandCategory = Enums.HandCategory.None;
             this._deck = new Deck();
             this.Reset();
         }
@@ -25,7 +32,7 @@ namespace PNGGAME.Model
         /// <summary>
         /// Resets Game
         /// </summary>
-        public void Reset()
+        public override void Reset()
         {
             this.ClearPlayers();
             this._deck.Reset();
@@ -34,9 +41,10 @@ namespace PNGGAME.Model
         /// <summary>
         /// Start Game
         /// </summary>
-        public void Start()
+        public override void Start()
         {
             this.SetPlayersHand();
+            this.EvaluateWinners();
         }
 
         /// <summary>
@@ -52,7 +60,7 @@ namespace PNGGAME.Model
         /// Add one player
         /// </summary>
         /// <param name="player"></param>
-        public void AddPlayer(Player player)
+        public override void AddPlayer(Player player)
         {
             this._players.Add((PokerPlayer)player);
         }
@@ -61,7 +69,7 @@ namespace PNGGAME.Model
         /// Add set of players
         /// </summary>
         /// <param name="players"></param>
-        public void AddPlayers(List<Player> players)
+        public override void AddPlayers(List<Player> players)
         {
             foreach (var player in players)
                 this._players.Add((PokerPlayer)player);
@@ -70,18 +78,18 @@ namespace PNGGAME.Model
         /// <summary>
         /// Clear player list
         /// </summary>
-        public void ClearPlayers()
+        public override void ClearPlayers()
         {
             this._players.Clear();
         }
 
         /// <summary>
-        /// Get game winner(s)
+        /// Evaluate winner based on hand category
         /// </summary>
-        /// <returns></returns>
-        public List<Player> GetWinners()
+        private void EvaluateWinners()
         {
-            throw new NotImplementedException();
+            this._winningHandCategory = HandHelper.GetWinningHandCategory(this._players);
+            this._winners = HandHelper.EvaluateWinners(this._players, this._winningHandCategory);
         }
     }
 }

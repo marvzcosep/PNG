@@ -44,6 +44,7 @@ namespace PNGGAME.Common
         /// </summary>
         public enum HandCategory
         {
+            None,
             HighCard,
             OnePair,
             TwoPair,
