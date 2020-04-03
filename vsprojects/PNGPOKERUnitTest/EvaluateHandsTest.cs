@@ -15,11 +15,11 @@ namespace PNGPOKERUnitTest
         {
             var cards = new Cards
             {
-                new Card(Rank.Ace, Suit.Clover),
-                new Card(Rank.King, Suit.Clover),
-                new Card(Rank.Queen, Suit.Clover),
-                new Card(Rank.Jack, Suit.Clover),
-                new Card(Rank.Ten, Suit.Clover)
+                new Card(Rank.Ace, Suit.Clubs),
+                new Card(Rank.King, Suit.Clubs),
+                new Card(Rank.Queen, Suit.Clubs),
+                new Card(Rank.Jack, Suit.Clubs),
+                new Card(Rank.Ten, Suit.Clubs)
             };
 
             Assert.IsTrue(HandHelper.IsItRoyalFlush(cards));
@@ -30,10 +30,10 @@ namespace PNGPOKERUnitTest
         {
             var cards = new Cards
             {
-                new Card(Rank.Two, Suit.Clover),
+                new Card(Rank.Two, Suit.Clubs),
                 new Card(Rank.King, Suit.Spades),
                 new Card(Rank.Five, Suit.Diamonds),
-                new Card(Rank.Jack, Suit.Clover),
+                new Card(Rank.Jack, Suit.Clubs),
                 new Card(Rank.Ace, Suit.Hearts)
             };
 
@@ -46,10 +46,10 @@ namespace PNGPOKERUnitTest
             var players = new List<PokerPlayer>()
             {
                 new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
-                                    new Card(Rank.Two, Suit.Clover),
+                                    new Card(Rank.Two, Suit.Clubs),
                                     new Card(Rank.King, Suit.Spades),
                                     new Card(Rank.Five, Suit.Diamonds),
-                                    new Card(Rank.Jack, Suit.Clover),
+                                    new Card(Rank.Jack, Suit.Clubs),
                                     new Card(Rank.Ace, Suit.Hearts)} } },
                 new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.Ace, Suit.Hearts),
@@ -95,10 +95,10 @@ namespace PNGPOKERUnitTest
         {
             var cards = new Cards
             {
-                new Card(Rank.Two, Suit.Clover),
+                new Card(Rank.Two, Suit.Clubs),
                 new Card(Rank.King, Suit.Spades),
                 new Card(Rank.Five, Suit.Diamonds),
-                new Card(Rank.Jack, Suit.Clover),
+                new Card(Rank.Jack, Suit.Clubs),
                 new Card(Rank.Ace, Suit.Hearts)
             };
 
@@ -111,11 +111,11 @@ namespace PNGPOKERUnitTest
             var players = new List<PokerPlayer>()
             {
                 new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
-                                    new Card(Rank.Eight, Suit.Clover),
-                                    new Card(Rank.Nine, Suit.Clover),
-                                    new Card(Rank.Queen, Suit.Clover),
-                                    new Card(Rank.Jack, Suit.Clover),
-                                    new Card(Rank.Ten, Suit.Clover)} } },
+                                    new Card(Rank.Eight, Suit.Clubs),
+                                    new Card(Rank.Nine, Suit.Clubs),
+                                    new Card(Rank.Queen, Suit.Clubs),
+                                    new Card(Rank.Jack, Suit.Clubs),
+                                    new Card(Rank.Ten, Suit.Clubs)} } },
                 new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.Nine, Suit.Hearts),
                                     new Card(Rank.King, Suit.Hearts),
@@ -145,10 +145,10 @@ namespace PNGPOKERUnitTest
         {
             var cards = new Cards
             {
-                new Card(Rank.Seven, Suit.Clover),
+                new Card(Rank.Seven, Suit.Clubs),
                 new Card(Rank.Four, Suit.Spades),
                 new Card(Rank.Four, Suit.Diamonds),
-                new Card(Rank.Four, Suit.Clover),
+                new Card(Rank.Four, Suit.Clubs),
                 new Card(Rank.Four, Suit.Hearts)
             };
 
@@ -160,10 +160,10 @@ namespace PNGPOKERUnitTest
         {
             var cards = new Cards
             {
-                new Card(Rank.Two, Suit.Clover),
+                new Card(Rank.Two, Suit.Clubs),
                 new Card(Rank.King, Suit.Spades),
                 new Card(Rank.Five, Suit.Diamonds),
-                new Card(Rank.Jack, Suit.Clover),
+                new Card(Rank.Jack, Suit.Clubs),
                 new Card(Rank.Ace, Suit.Hearts)
             };
 
@@ -178,19 +178,19 @@ namespace PNGPOKERUnitTest
                 new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.King, Suit.Diamonds),
                                     new Card(Rank.King, Suit.Hearts),
-                                    new Card(Rank.King, Suit.Clover),
+                                    new Card(Rank.King, Suit.Clubs),
                                     new Card(Rank.King, Suit.Spades),
                                     new Card(Rank.Ace, Suit.Hearts)} } },
                 new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.Ace, Suit.Diamonds),
                                     new Card(Rank.Ace, Suit.Hearts),
-                                    new Card(Rank.Ace, Suit.Clover),
+                                    new Card(Rank.Ace, Suit.Clubs),
                                     new Card(Rank.Ace, Suit.Spades),
                                     new Card(Rank.Queen, Suit.Hearts)} } },
                 new PokerPlayer() { Name = "Des", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.Queen, Suit.Diamonds),
                                     new Card(Rank.Queen, Suit.Hearts),
-                                    new Card(Rank.Queen, Suit.Clover),
+                                    new Card(Rank.Queen, Suit.Clubs),
                                     new Card(Rank.Queen, Suit.Spades),
                                     new Card(Rank.Jack, Suit.Hearts)} } }
             };
@@ -210,11 +210,11 @@ namespace PNGPOKERUnitTest
         {
             var cards = new Cards
             {
-                new Card(Rank.Two, Suit.Clover),
+                new Card(Rank.Two, Suit.Clubs),
                 new Card(Rank.Four, Suit.Spades),
                 new Card(Rank.Two, Suit.Diamonds),
                 new Card(Rank.Four, Suit.Hearts),
-                new Card(Rank.Four, Suit.Clover)
+                new Card(Rank.Four, Suit.Clubs)
             };
 
             Assert.IsTrue(HandHelper.IsItFullHouse(cards));
@@ -225,10 +225,10 @@ namespace PNGPOKERUnitTest
         {
             var cards = new Cards
             {
-                new Card(Rank.Two, Suit.Clover),
+                new Card(Rank.Two, Suit.Clubs),
                 new Card(Rank.King, Suit.Spades),
                 new Card(Rank.Five, Suit.Diamonds),
-                new Card(Rank.Jack, Suit.Clover),
+                new Card(Rank.Jack, Suit.Clubs),
                 new Card(Rank.Ace, Suit.Hearts)
             };
 
@@ -243,19 +243,19 @@ namespace PNGPOKERUnitTest
                 new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.King, Suit.Diamonds),
                                     new Card(Rank.King, Suit.Hearts),
-                                    new Card(Rank.King, Suit.Clover),
+                                    new Card(Rank.King, Suit.Clubs),
                                     new Card(Rank.Ace, Suit.Spades),
                                     new Card(Rank.Ace, Suit.Hearts)} } },
                 new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.Ace, Suit.Diamonds),
                                     new Card(Rank.Ace, Suit.Hearts),
-                                    new Card(Rank.Ace, Suit.Clover),
+                                    new Card(Rank.Ace, Suit.Clubs),
                                     new Card(Rank.Queen, Suit.Spades),
                                     new Card(Rank.Queen, Suit.Hearts)} } },
                 new PokerPlayer() { Name = "Des", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.Queen, Suit.Diamonds),
                                     new Card(Rank.Queen, Suit.Hearts),
-                                    new Card(Rank.Queen, Suit.Clover),
+                                    new Card(Rank.Queen, Suit.Clubs),
                                     new Card(Rank.Jack, Suit.Spades),
                                     new Card(Rank.Jack, Suit.Hearts)} } }
             };
@@ -275,11 +275,11 @@ namespace PNGPOKERUnitTest
         {
             var cards = new Cards
             {
-                new Card(Rank.Seven, Suit.Clover),
-                new Card(Rank.King, Suit.Clover),
-                new Card(Rank.Eight, Suit.Clover),
-                new Card(Rank.Two, Suit.Clover),
-                new Card(Rank.Ten, Suit.Clover)
+                new Card(Rank.Seven, Suit.Clubs),
+                new Card(Rank.King, Suit.Clubs),
+                new Card(Rank.Eight, Suit.Clubs),
+                new Card(Rank.Two, Suit.Clubs),
+                new Card(Rank.Ten, Suit.Clubs)
             };
 
             Assert.IsTrue(HandHelper.IsItFlush(cards));
@@ -290,10 +290,10 @@ namespace PNGPOKERUnitTest
         {
             var cards = new Cards
             {
-                new Card(Rank.Two, Suit.Clover),
+                new Card(Rank.Two, Suit.Clubs),
                 new Card(Rank.King, Suit.Spades),
                 new Card(Rank.Five, Suit.Diamonds),
-                new Card(Rank.Jack, Suit.Clover),
+                new Card(Rank.Jack, Suit.Clubs),
                 new Card(Rank.Ace, Suit.Hearts)
             };
 
@@ -340,10 +340,10 @@ namespace PNGPOKERUnitTest
         {
             var cards = new Cards
             {
-                new Card(Rank.Nine, Suit.Clover),
+                new Card(Rank.Nine, Suit.Clubs),
                 new Card(Rank.Seven, Suit.Spades),
                 new Card(Rank.Ten, Suit.Diamonds),
-                new Card(Rank.Eight, Suit.Clover),
+                new Card(Rank.Eight, Suit.Clubs),
                 new Card(Rank.Six, Suit.Hearts)
             };
 
@@ -355,10 +355,10 @@ namespace PNGPOKERUnitTest
         {
             var cards = new Cards
             {
-                new Card(Rank.Two, Suit.Clover),
+                new Card(Rank.Two, Suit.Clubs),
                 new Card(Rank.King, Suit.Spades),
                 new Card(Rank.Five, Suit.Diamonds),
-                new Card(Rank.Jack, Suit.Clover),
+                new Card(Rank.Jack, Suit.Clubs),
                 new Card(Rank.Ace, Suit.Hearts)
             };
 
@@ -373,21 +373,21 @@ namespace PNGPOKERUnitTest
                 new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.Eight, Suit.Hearts),
                                     new Card(Rank.Nine, Suit.Spades),
-                                    new Card(Rank.Queen, Suit.Clover),
+                                    new Card(Rank.Queen, Suit.Clubs),
                                     new Card(Rank.Jack, Suit.Diamonds),
                                     new Card(Rank.Ten, Suit.Hearts)} } },
                 new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.Nine, Suit.Spades),
-                                    new Card(Rank.King, Suit.Clover),
+                                    new Card(Rank.King, Suit.Clubs),
                                     new Card(Rank.Queen, Suit.Diamonds),
                                     new Card(Rank.Jack, Suit.Hearts),
                                     new Card(Rank.Ten, Suit.Spades)} } },
                 new PokerPlayer() { Name = "Des", Hand = new Hand() { Cards = new Cards{
-                                    new Card(Rank.Nine, Suit.Clover),
+                                    new Card(Rank.Nine, Suit.Clubs),
                                     new Card(Rank.King, Suit.Diamonds),
                                     new Card(Rank.Queen, Suit.Hearts),
                                     new Card(Rank.Jack, Suit.Spades),
-                                    new Card(Rank.Ten, Suit.Clover)} } }
+                                    new Card(Rank.Ten, Suit.Clubs)} } }
             };
 
             foreach (var player in players)
@@ -405,10 +405,10 @@ namespace PNGPOKERUnitTest
         {
             var cards = new Cards
             {
-                new Card(Rank.Eight, Suit.Clover),
+                new Card(Rank.Eight, Suit.Clubs),
                 new Card(Rank.King, Suit.Spades),
                 new Card(Rank.Eight, Suit.Diamonds),
-                new Card(Rank.Jack, Suit.Clover),
+                new Card(Rank.Jack, Suit.Clubs),
                 new Card(Rank.Eight, Suit.Hearts)
             };
 
@@ -420,10 +420,10 @@ namespace PNGPOKERUnitTest
         {
             var cards = new Cards
             {
-                new Card(Rank.Two, Suit.Clover),
+                new Card(Rank.Two, Suit.Clubs),
                 new Card(Rank.King, Suit.Spades),
                 new Card(Rank.Five, Suit.Diamonds),
-                new Card(Rank.Jack, Suit.Clover),
+                new Card(Rank.Jack, Suit.Clubs),
                 new Card(Rank.Ace, Suit.Hearts)
             };
 
@@ -438,19 +438,19 @@ namespace PNGPOKERUnitTest
                 new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.King, Suit.Diamonds),
                                     new Card(Rank.King, Suit.Hearts),
-                                    new Card(Rank.King, Suit.Clover),
+                                    new Card(Rank.King, Suit.Clubs),
                                     new Card(Rank.Ace, Suit.Spades),
                                     new Card(Rank.Two, Suit.Hearts)} } },
                 new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.Ace, Suit.Diamonds),
                                     new Card(Rank.Ace, Suit.Hearts),
-                                    new Card(Rank.Ace, Suit.Clover),
+                                    new Card(Rank.Ace, Suit.Clubs),
                                     new Card(Rank.Queen, Suit.Spades),
                                     new Card(Rank.King, Suit.Hearts)} } },
                 new PokerPlayer() { Name = "Des", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.Queen, Suit.Diamonds),
                                     new Card(Rank.Queen, Suit.Hearts),
-                                    new Card(Rank.Queen, Suit.Clover),
+                                    new Card(Rank.Queen, Suit.Clubs),
                                     new Card(Rank.Eight, Suit.Spades),
                                     new Card(Rank.Jack, Suit.Hearts)} } }
             };
@@ -470,10 +470,10 @@ namespace PNGPOKERUnitTest
         {
             var cards = new Cards
             {
-                new Card(Rank.Six, Suit.Clover),
+                new Card(Rank.Six, Suit.Clubs),
                 new Card(Rank.Nine, Suit.Spades),
                 new Card(Rank.Ace, Suit.Diamonds),
-                new Card(Rank.Nine, Suit.Clover),
+                new Card(Rank.Nine, Suit.Clubs),
                 new Card(Rank.Ace, Suit.Hearts)
             };
 
@@ -485,10 +485,10 @@ namespace PNGPOKERUnitTest
         {
             var cards = new Cards
             {
-                new Card(Rank.Two, Suit.Clover),
+                new Card(Rank.Two, Suit.Clubs),
                 new Card(Rank.King, Suit.Spades),
                 new Card(Rank.Five, Suit.Diamonds),
-                new Card(Rank.Jack, Suit.Clover),
+                new Card(Rank.Jack, Suit.Clubs),
                 new Card(Rank.Ace, Suit.Hearts)
             };
 
@@ -503,19 +503,19 @@ namespace PNGPOKERUnitTest
                 new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.King, Suit.Diamonds),
                                     new Card(Rank.King, Suit.Hearts),
-                                    new Card(Rank.Ace, Suit.Clover),
+                                    new Card(Rank.Ace, Suit.Clubs),
                                     new Card(Rank.Ace, Suit.Spades),
                                     new Card(Rank.Six, Suit.Hearts)} } },
                 new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.Ace, Suit.Diamonds),
                                     new Card(Rank.Ace, Suit.Hearts),
-                                    new Card(Rank.King, Suit.Clover),
+                                    new Card(Rank.King, Suit.Clubs),
                                     new Card(Rank.Queen, Suit.Spades),
                                     new Card(Rank.King, Suit.Hearts)} } },
                 new PokerPlayer() { Name = "Des", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.Queen, Suit.Diamonds),
                                     new Card(Rank.Queen, Suit.Hearts),
-                                    new Card(Rank.Jack, Suit.Clover),
+                                    new Card(Rank.Jack, Suit.Clubs),
                                     new Card(Rank.Eight, Suit.Spades),
                                     new Card(Rank.Jack, Suit.Hearts)} } }
             };
@@ -535,10 +535,10 @@ namespace PNGPOKERUnitTest
         {
             var cards = new Cards
             {
-                new Card(Rank.Six, Suit.Clover),
+                new Card(Rank.Six, Suit.Clubs),
                 new Card(Rank.Nine, Suit.Spades),
                 new Card(Rank.King, Suit.Diamonds),
-                new Card(Rank.Nine, Suit.Clover),
+                new Card(Rank.Nine, Suit.Clubs),
                 new Card(Rank.Ace, Suit.Hearts)
             };
 
@@ -550,10 +550,10 @@ namespace PNGPOKERUnitTest
         {
             var cards = new Cards
             {
-                new Card(Rank.Two, Suit.Clover),
+                new Card(Rank.Two, Suit.Clubs),
                 new Card(Rank.King, Suit.Spades),
                 new Card(Rank.Five, Suit.Diamonds),
-                new Card(Rank.Jack, Suit.Clover),
+                new Card(Rank.Jack, Suit.Clubs),
                 new Card(Rank.Ace, Suit.Hearts)
             };
 
@@ -568,19 +568,19 @@ namespace PNGPOKERUnitTest
                 new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.Jack, Suit.Diamonds),
                                     new Card(Rank.King, Suit.Hearts),
-                                    new Card(Rank.Ace, Suit.Clover),
+                                    new Card(Rank.Ace, Suit.Clubs),
                                     new Card(Rank.Ace, Suit.Spades),
                                     new Card(Rank.Six, Suit.Hearts)} } },
                 new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.Ace, Suit.Diamonds),
                                     new Card(Rank.Ace, Suit.Hearts),
-                                    new Card(Rank.King, Suit.Clover),
+                                    new Card(Rank.King, Suit.Clubs),
                                     new Card(Rank.Queen, Suit.Spades),
                                     new Card(Rank.Jack, Suit.Hearts)} } },
                 new PokerPlayer() { Name = "Des", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.Queen, Suit.Diamonds),
                                     new Card(Rank.Queen, Suit.Hearts),
-                                    new Card(Rank.Jack, Suit.Clover),
+                                    new Card(Rank.Jack, Suit.Clubs),
                                     new Card(Rank.Eight, Suit.Spades),
                                     new Card(Rank.Five, Suit.Hearts)} } }
             };
@@ -601,21 +601,21 @@ namespace PNGPOKERUnitTest
             var players = new List<PokerPlayer>()
             {
                 new PokerPlayer() { Name = "Marvz", Hand = new Hand() { Cards = new Cards{
-                                    new Card(Rank.Two, Suit.Clover),
+                                    new Card(Rank.Two, Suit.Clubs),
                                     new Card(Rank.King, Suit.Spades),
                                     new Card(Rank.Five, Suit.Diamonds),
-                                    new Card(Rank.Jack, Suit.Clover),
+                                    new Card(Rank.Jack, Suit.Clubs),
                                     new Card(Rank.Ace, Suit.Hearts)} } },
                 new PokerPlayer() { Name = "Keng", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.Three, Suit.Hearts),
-                                    new Card(Rank.King, Suit.Clover),
+                                    new Card(Rank.King, Suit.Clubs),
                                     new Card(Rank.Five, Suit.Spades),
                                     new Card(Rank.Jack, Suit.Diamonds),
-                                    new Card(Rank.Ace, Suit.Clover)} } },
+                                    new Card(Rank.Ace, Suit.Clubs)} } },
                 new PokerPlayer() { Name = "Des", Hand = new Hand() { Cards = new Cards{
                                     new Card(Rank.Three, Suit.Diamonds),
                                     new Card(Rank.King, Suit.Hearts),
-                                    new Card(Rank.Five, Suit.Clover),
+                                    new Card(Rank.Five, Suit.Clubs),
                                     new Card(Rank.Jack, Suit.Spades),
                                     new Card(Rank.Ace, Suit.Diamonds)} } }
             };

@@ -81,7 +81,7 @@ namespace PNGGAME.Common
 
             switch (suit)
             {
-                case Enums.Suit.Clover:
+                case Enums.Suit.Clubs:
                     result = "C";
                     break;
                 case Enums.Suit.Diamonds:

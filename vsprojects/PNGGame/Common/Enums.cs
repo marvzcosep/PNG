@@ -7,10 +7,10 @@
         /// </summary>
         public enum Suit
         {
-            Hearts,     // Hearts
-            Spades,     // Spades
-            Clover,     // Clover
-            Diamonds    // Diamond
+            Hearts,
+            Spades,
+            Clubs,
+            Diamonds
         }
 
         /// <summary>
